@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div th:insert="layout/head :: myhead"></div>
+<title>Ultimo Producto</title>
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 mt-4 mb-4">
+				<div class="card border-primary mb-3">
+				  <h5 class="card-header">Último Producto Registrado</h5>
+				  <div class="text-center card-body">
+				    <h5 class="card-title">Detalles del Producto</h5>
+				    <p class="card-text">Código de Producto: <span th:text="${producto.codigo}"></span></p>
+				    <p class="card-text">Nombre de Producto: <span th:text="${producto.nombre}"></span></p>
+				    <p class="card-text">Precio: <span th:text="${producto.precio}"></span></p>
+				    <p class="card-text">Marca: <span th:text="${producto.marca}"></span></p>
+				    <p class="card-text">Stock: <span th:text="${producto.stock}"></span></p>
+				    <div class="text-end">
+				    	<a href="/producto/nuevo" class="btn btn-success">Aceptar</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<aside th:insert="layout/publicidad :: aside"></aside>
+			</div>
+			
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

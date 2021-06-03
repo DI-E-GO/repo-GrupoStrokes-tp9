@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div th:insert="layout/head :: myhead"></div>
+<title>Guardar Compra</title>
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 mt-4 mb-4">
+				<div class="card border-success mb-3">
+				  <h5 class="card-header">Nueva Compra</h5>
+				  <div class="card-body text-success">
+				    <h5 class="card-title">¡¡Compra Registrada!!</h5>
+				    <p class="card-text fw-bold">Detalles de la Compra:</p>
+				    <p class="card-text" th:text="'ID:'+${compra.id}+' - CANTIDAD:'+${compra.cantidad}+' - TOTAL:'+${compra.total}"></p>			
+				    <p class="card-text fw-bold">Detalle del Producto:</p>
+				    <p class="card-text" th:text="'CODIGO:'+${compra.producto.codigo}+' - NOMBRE:'+${compra.producto.nombre}+' - PRECIO:'+${compra.producto.precio}+' - MARCA:'+${compra.producto.marca}+' - STOCK:'+${compra.producto.stock}"></p>
+				    <div class="text-end">
+				    	<a href="/compra/nuevo" class="btn btn-success">Aceptar</a>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<aside th:insert="layout/publicidad :: aside"></aside>
+			</div>
+			
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

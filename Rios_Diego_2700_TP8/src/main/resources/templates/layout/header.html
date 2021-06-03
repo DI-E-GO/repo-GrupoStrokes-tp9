@@ -1,0 +1,58 @@
+<html>
+<head>
+<!-- Required meta tags -->
+		<meta content="text/html" charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div id="header" th:fragment="header">
+		<div class="bg-dark bg-gradient text-white text-center p-4">
+			<img class="img-fluid" alt="" src="https://logodownload.org/wp-content/uploads/2020/03/redragon-logo-4.png">
+		</div>
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #EB130E;">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/home">Bienvenidos</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active" aria-current="page" href="/home">Inicio</a></li>
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Producto</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="/producto/nuevo">Nuevo Producto</a></li>
+								<li><a class="dropdown-item" href="/producto/ultimo">Último Producto</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Cliente</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="/cliente/nuevo">Nuevo Cliente</a></li>
+								<li><a class="dropdown-item" href="/cliente/listado">Tabla de Clientes</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">Compra</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="/compra/nuevo">Nueva Compra</a></li>
+								<li><a class="dropdown-item" href="/compra/lista">Compras Realizadas</a></li>
+							</ul>
+						</li>
+						<li class="nav-item"><a class="nav-link disabled" href="#"
+							tabindex="-1" aria-disabled="true">Registrarse</a></li>
+					</ul>
+					<!--<form class="d-flex">
+						<input class="form-control me-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>-->
+				</div>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

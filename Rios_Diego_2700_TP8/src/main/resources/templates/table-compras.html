@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div th:insert="layout/head :: myhead"></div>
+<title>Compras Realizadas</title>
+</head>
+<body>
+	<div th:replace="/layout/header :: header"></div>
+	<div class="container">
+		<section class="row m-0 p-0">
+			<div class="col-md-10 mt-5 mb-5">
+				<div class="alert alert-success" role="alert">
+		  		Se realizo la(s) compra(s) exitosamente. <a href="/compra/nuevo" class="alert-link">Click aqui</a>. Para realizar una nueva compra
+				</div>
+				
+				<div class="card">
+				  <div class="card-header text-white text-center bg-success">
+				    <h2>Busqueda de Compra</h2>
+				  </div>
+				  <div class="card-body">
+				    <form th:action="@{/compra/busqueda}" th:object="${compra}" th:method="GET">
+				    	   <div class="row g-3">
+							    <div class="col-md-4">
+							      <label for="nombre">Nombre del Producto</label>
+							      <input type="text" class="form-control" name="nombre" id="nombre" th:field="*{producto.nombre}">
+							    </div>
+							    <div class="col-md-4">
+							      <label for="total">Monto Superior a</label>
+							      <input type="number" class="form-control" name="total" id="total" th:field="*{total}">
+							    </div>
+							   <div class="col-md-2">
+								   <button type="submit" class="btn btn-primary mt-4">Buscar</button>
+							   </div>
+							</div>
+				    </form>
+				  </div>
+				</div>
+				<br>
+				<div class="card">
+				  <div class="card-header text-white text-center bg-success mb-3">
+				    <h2>Compras Realizadas</h2>
+				  </div>
+				  <div class="card-body">
+				     	<table class="text-center table table-sm table-striped table-responsive table-bordered">
+						  <thead class="text-white bg-secondary">
+						    <tr>
+						      <th scope="col">ID</th>
+						      <th scope="col">Nombre Producto</th>
+						      <th scope="col">Precio Producto</th>
+						      <th scope="col">Marca Producto</th>
+						      <th scope="col">Cantidad</th>
+						      <th scope="col">Total</th>
+						      <th scope="col">Acciones</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr th:each="comp : ${compras}">
+						     	<td th:text="${comp.id}"></td>
+								<td th:text="${comp.producto.nombre}"></td>
+								<td th:text="${comp.producto.precio}"></td>
+								<td th:text="${comp.producto.marca}"></td>
+								<td th:text="${comp.cantidad}"></td>
+								<td th:text="'$ '+ ${comp.total}"></td>
+								<td>
+									<div class="btn-group btn-group-sm" role="group">
+										<a th:href="@{/compra/editar/}+${comp.id}"  class="btn btn-outline-warning">Editar</a>
+										<a th:href="@{/compra/borrar/}+${comp.id}" class="btn btn-outline-danger">Borrar</a>
+									</div>
+								</td>
+						    </tr>
+						  </tbody>
+						</table>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<aside th:insert="layout/publicidad :: aside"></aside>
+			</div>
+		</section>
+		
+	</div>
+	<div th:replace="/layout/footer :: footer"></div>	
+
+</body>
+</html>

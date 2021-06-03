@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div th:insert="layout/head :: myhead"></div>
+<title>Nuevo Cliente</title>
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 mt-4 mb-4">
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-8 border border-2 rounded pb-3">
+						<form th:action="@{/compra/guardar}" th:object="${compra}"
+							method="POST">
+							<h1 class="text-center pt-3 pb-3">Nueva Compra</h1>
+							<div class="row g-3 align-items-center">
+								<div class="col-4 text-end">
+									<label for="inputId" class="col-form-label">ID</label>
+								</div>
+								<div class="col-8">
+									<input type="number" id="inputId" class="form-control"
+										th:field="*{id}" th:readonly="readonly">
+								</div>
+								<div class="col-4 text-end">
+									<label for="inputDocumento" class="col-form-label">Producto</label>
+								</div>
+								<div class="col-8">
+									<select class="form-select" id="producto" th:field="*{producto.codigo}">
+										<option th:each="prod : ${productos}" th:value="${prod.codigo}" th:text="${prod.nombre}"></option>
+									</select>
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('producto.codigo')}" th:errors="*{producto.codigo}"></div>
+								</div>
+								
+								<div class="col-4 text-end">
+									<label for="inputCantidad" class="col-form-label">Cantidad</label>
+								</div>
+								<div class="col-8">
+									<input type="number" id="inputCantidad" class="form-control"
+										th:field="*{cantidad}" th:name="cantidad">
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
+								</div>
+								
+								<div class="col-4 text-end">
+									<label for="inputTotal" class="col-form-label">Total</label>
+								</div>
+								<div class="col-8">
+									<input type="number" id="inputTotal" class="form-control"
+										th:field="*{total}" th:readonly="readonly">
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('total')}" th:errors="*{total}"></div>
+								</div>
+								
+							</div>
+							<div class="d-grid gap-2 mt-3">
+								<input class="btn btn-outline-success" type="submit" id="liveToastBtn" value="Guardar">
+								<input class="btn btn-outline-danger" type="reset" value="Cancelar">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<aside th:insert="layout/publicidad :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

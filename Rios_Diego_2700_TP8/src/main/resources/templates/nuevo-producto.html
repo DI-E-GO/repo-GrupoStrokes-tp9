@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div th:insert="layout/head :: myhead"></div>
+<title>Nuevo Producto</title>
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 mt-4 mb-4">
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-8 border border-2 rounded pb-3">
+						<form th:action="@{/producto/guardar}" th:object="${producto}" method="POST">
+							<h1 class="text-center pt-3 pb-3">Nuevo Producto</h1>
+							<div class="row g-3 align-items-center">
+								<div class="col-4 text-end">
+									<label for="inputCodigo" class="col-form-label">Código de Producto</label>
+								</div>
+								<div class="col-8">
+									<input type="number" id="inputCodigo" class="form-control"
+										th:field="*{codigo}" th:readonly="readonly">
+								</div>
+
+								<div class="col-4 text-end">
+									<label for="inputNombre" class="col-form-label">Nombre del Producto</label>
+								</div>
+								<div class="col-8">
+									<input type="text" id="inputNombre" class="form-control"
+										th:field="*{nombre}">
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+								</div>
+								
+								<div class="col-4 text-end">
+									<label for="inputPrecio" class="col-form-label">Precio</label>
+								</div>
+								<div class="col-8">
+									<input type="number" id="inputPrecio" class="form-control"
+										th:field="*{precio}">
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+								</div>
+								
+								<div class="col-4 text-end">
+									<label for="inputMarca" class="col-form-label">Marca</label>
+								</div>
+								<div class="col-8">
+									<input type="text" id="inputMarca" class="form-control"
+										th:field="*{marca}">
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></div>
+								</div>
+								
+								<div class="col-4 text-end">
+									<label for="inputStock" class="col-form-label">Stock</label>
+								</div>
+								<div class="col-8">
+									<input type="number" id="inputStock" class="form-control"
+										th:field="*{stock}">
+								</div>
+								<!-- Mensaje Validador -->
+								<div class="row justify-content-end">
+									<div class="col-8 form-text text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
+								</div>
+							</div>
+							<div class="d-grid gap-2 mt-3">
+								<input class="btn btn-outline-success" type="submit" id="liveToastBtn" value="Guardar">
+								<input class="btn btn-outline-danger" type="reset" value="Cancelar">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<aside th:insert="layout/publicidad :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>
