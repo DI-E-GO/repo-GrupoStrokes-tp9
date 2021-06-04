@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -49,7 +53,7 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "cli_id")
 	private Long id;
 	
 	@Size(min = 2, max = 120, message = "Ingrese desde 2 a 120 caracteres")
@@ -95,6 +99,14 @@ public class Cliente {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cuenta_id")
 	private Cuenta cuenta;
+	
+	@ManyToMany()
+	@JoinTable(
+		name = "clientes_beneficios",
+		joinColumns = @JoinColumn(name = "cli_id"),
+		inverseJoinColumns = @JoinColumn(name = "ben_id")
+	)
+	private List<Beneficio> beneficios = new ArrayList<Beneficio>();
 	
 	
 	public Cliente() {
