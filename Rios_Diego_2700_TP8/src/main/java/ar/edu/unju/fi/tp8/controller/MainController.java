@@ -39,6 +39,7 @@ public class MainController {
 	
 	@GetMapping("/cliente/nuevo")
 	public String getNuevoClientePage(Model model) {
+		model.addAttribute("productos", productoService.listaProductos());
 		model.addAttribute(clienteService.getCliente());
 		return "nuevo-cliente";
 	}
