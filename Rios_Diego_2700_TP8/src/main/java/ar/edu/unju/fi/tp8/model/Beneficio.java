@@ -42,13 +42,15 @@ public class Beneficio {
 	/**
 	 * @param id
 	 * @param descripcion
+	 * @param clientes
 	 */
-	public Beneficio(int id, String descripcion) {
+	public Beneficio(int id, @Size(max = 120) String descripcion, List<Cliente> clientes) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
+		this.clientes = clientes;
 	}
-	
+
 	/**
 	 * @return the id
 	 */
@@ -73,12 +75,24 @@ public class Beneficio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	/**
+	 * @return the clientes
+	 */
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	/**
+	 * @param clientes the clientes to set
+	 */
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	@Override
 	public String toString() {
 		return "Beneficio [id=" + id + ", descripcion=" + descripcion + "]";
 	}
 	
-	
-	
-
 }

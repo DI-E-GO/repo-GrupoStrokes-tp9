@@ -134,6 +134,7 @@ public class Cliente {
 		Period p = Period.between(fechaUltimaCompra, LocalDate.now());
 		return "Última compra:"+p.getYears()+"(años) "+p.getMonths()+"(meses) "+p.getDays()+"(días)";
 	}
+
 	/**
 	 * @param tipoDocumento
 	 * @param nroDocumento
@@ -147,10 +148,19 @@ public class Cliente {
 	 * @param nroTelefono
 	 * @param fechaUltimaCompra
 	 * @param cuenta
+	 * @param beneficios
 	 */
-	public Cliente(String tipoDocumento, int nroDocumento, Long id, String nombreApellido, String email,
-			String password, LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono,
-			LocalDate fechaUltimaCompra, Cuenta cuenta) {
+	public Cliente(@NotEmpty(message = "Seleccione tipo de Documento") String tipoDocumento,
+			@Min(value = 9999999, message = "Debe Ingresar numero de documento valido") @Max(value = 99999999, message = "Debe Ingresar numero de documento valido") int nroDocumento,
+			Long id,
+			@Size(min = 2, max = 120, message = "Ingrese desde 2 a 120 caracteres") @NotEmpty(message = "Ingrese su Nombre/s y su Apellido/s") String nombreApellido,
+			@NotEmpty(message = "Agregue un correo electronico personal") @Email(message = "Formato de e-mail no valido, por ej: example@email.com") String email,
+			@NotNull(message = "Ingrese una contraseña") @Size(min = 4, max = 20, message = "Ingrese una contraseña desde 4 a 20 caracteres") String password,
+			@NotNull(message = "Seleccione su fecha de nacimiento") LocalDate fechaNacimiento, int edad,
+			@Max(value = 9999, message = "Codigo de area incorrecto, debe ser menor a 5 digitos") @Min(value = 1, message = "Codigo de area incorrecto, debe ser mayor a 1 digitos") int codigoAreaTelefono,
+			@Max(value = 99999999, message = "Numero telefonico incorrecto, debe ser menor a 8 digitos") @Min(value = 0, message = "Numero telefonico incorrecto, debe ser mayor a 5 digitos") int nroTelefono,
+			@NotNull(message = "Seleccione una fecha de la ultima compra") LocalDate fechaUltimaCompra,
+			@Valid Cuenta cuenta, List<Beneficio> beneficios) {
 		super();
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
@@ -164,6 +174,7 @@ public class Cliente {
 		this.nroTelefono = nroTelefono;
 		this.fechaUltimaCompra = fechaUltimaCompra;
 		this.cuenta = cuenta;
+		this.beneficios = beneficios;
 	}
 
 	/**
@@ -356,6 +367,20 @@ public class Cliente {
 	 */
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
+	}
+
+	/**
+	 * @return the beneficios
+	 */
+	public List<Beneficio> getBeneficios() {
+		return beneficios;
+	}
+
+	/**
+	 * @param beneficios the beneficios to set
+	 */
+	public void setBeneficios(List<Beneficio> beneficios) {
+		this.beneficios = beneficios;
 	}
 
 	@Override
