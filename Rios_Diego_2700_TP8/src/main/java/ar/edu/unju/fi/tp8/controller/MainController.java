@@ -17,12 +17,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.tp8.model.Beneficio;
 import ar.edu.unju.fi.tp8.model.Cliente;
+import ar.edu.unju.fi.tp8.model.Cuenta;
 import ar.edu.unju.fi.tp8.model.Producto;
+import ar.edu.unju.fi.tp8.service.IBeneficioService;
 import ar.edu.unju.fi.tp8.service.IClienteService;
 import ar.edu.unju.fi.tp8.service.IProductoService;
 @Controller
 public class MainController {
+	@Autowired
+	Cliente cliente;
+	
+	@Autowired
+	Cuenta cuenta;
+	
+	@Autowired
+	Beneficio beneficio;
+	
+	@Autowired
+	@Qualifier("beneficioServiceMysql")
+	private IBeneficioService beneficioService;
+	
 	@Autowired
 	@Qualifier("clienteServiceMysql")
 	private IClienteService clienteService;
@@ -39,19 +55,28 @@ public class MainController {
 	
 	@GetMapping("/cliente/nuevo")
 	public String getNuevoClientePage(Model model) {
+		model.addAttribute(beneficioService.getBeneficio());
 		model.addAttribute(clienteService.getCliente());
+		model.addAttribute("beneficio", beneficio);
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("cuenta", cuenta);
+		model.addAttribute("beneficios", beneficioService.getBeneficios());
 		return "nuevo-cliente";
 	}
 	@PostMapping("/cliente/guardar")
-	public ModelAndView proccesFormCliente(@Valid @ModelAttribute("cliente") Cliente unCliente, BindingResult resultadoValidacion) {
+	public ModelAndView proccesFormCliente(Model model, @Valid @ModelAttribute("cliente") Cliente unCliente, BindingResult resultadoValidacion) {
 		ModelAndView modelView;
 		if (resultadoValidacion.hasErrors()) {
 			modelView = new ModelAndView("nuevo-cliente");
+			modelView.addObject("beneficio", beneficio);
+			modelView.addObject("beneficios", beneficioService.getBeneficios());
+			modelView.addObject("beneficiosAgregados", beneficioService.listaBeneficiosAgregados());
 			return modelView;
 		} else {
 			modelView = new ModelAndView("resultado-cliente");
 			long edad = ChronoUnit.YEARS.between(unCliente.getFechaNacimiento(), LocalDate.now());
 			unCliente.setEdad((int)edad);
+			unCliente.setBeneficios(beneficioService.listaBeneficiosAgregados());
 			clienteService.addCliente(unCliente);
 			return modelView;
 		}

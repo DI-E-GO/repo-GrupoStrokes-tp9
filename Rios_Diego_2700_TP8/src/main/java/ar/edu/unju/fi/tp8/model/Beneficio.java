@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class Beneficio {
 	@Column(name = "ben_id")
 	private int id;
 	
+	@NotNull(message = "Selecione un beneficio")
 	@Size(max = 120)
 	@Column(name = "ben_descripcion")
 	private String descripcion;
@@ -73,6 +75,20 @@ public class Beneficio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	/**
+	 * @return the clientes
+	 */
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	/**
+	 * @param clientes the clientes to set
+	 */
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	@Override
 	public String toString() {
 		return "Beneficio [id=" + id + ", descripcion=" + descripcion + "]";
