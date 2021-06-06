@@ -99,7 +99,7 @@ public class Cliente {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cuenta_id")
 	private Cuenta cuenta;
-	
+	@Valid
 	@ManyToMany()
 	@JoinTable(
 		name = "clientes_beneficios",
@@ -150,7 +150,7 @@ public class Cliente {
 	 */
 	public Cliente(String tipoDocumento, int nroDocumento, Long id, String nombreApellido, String email,
 			String password, LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono,
-			LocalDate fechaUltimaCompra, Cuenta cuenta) {
+			LocalDate fechaUltimaCompra, Cuenta cuenta, List<Beneficio> beneficios) {
 		super();
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
@@ -164,8 +164,8 @@ public class Cliente {
 		this.nroTelefono = nroTelefono;
 		this.fechaUltimaCompra = fechaUltimaCompra;
 		this.cuenta = cuenta;
+		this.beneficios = beneficios;
 	}
-
 	/**
 	 * @return String con los días desde la fechaNacimiento de un cliente hasta la fecha actual 
 	 */
@@ -356,6 +356,20 @@ public class Cliente {
 	 */
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
+	}
+	
+	/**
+	 * @return the beneficios
+	 */
+	public List<Beneficio> getBeneficios() {
+		return beneficios;
+	}
+
+	/**
+	 * @param beneficios the beneficios to set
+	 */
+	public void setBeneficios(List<Beneficio> beneficios) {
+		this.beneficios = beneficios;
 	}
 
 	@Override
