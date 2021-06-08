@@ -26,6 +26,8 @@ import ar.edu.unju.fi.tp8.service.IClienteService;
 import ar.edu.unju.fi.tp8.service.IProductoService;
 @Controller
 public class MainController {
+	static public Long idCliente; 
+
 	@Autowired
 	Cliente cliente;
 	
@@ -58,7 +60,7 @@ public class MainController {
 		model.addAttribute(beneficioService.getBeneficio());
 		model.addAttribute(clienteService.getCliente());
 		model.addAttribute("beneficio", beneficio);
-		model.addAttribute("cliente", cliente);
+		model.addAttribute("cliente", clienteService.getCliente());
 		model.addAttribute("cuenta", cuenta);
 		model.addAttribute("beneficios", beneficioService.getBeneficios());
 		return "nuevo-cliente";
@@ -92,8 +94,14 @@ public class MainController {
 	}
 	@GetMapping("/cliente/editar/{id}")
 	public String editarCliente(@PathVariable Long id, Model model) {
+		idCliente=id;
+		beneficioService.listaBeneficiosAgregados();
 		Optional<Cliente> cliente = clienteService.getCliente(id);
+		this.cliente = cliente.get();
+		model.addAttribute("beneficio", beneficio);
+		model.addAttribute("beneficiosAgregados", this.cliente.getBeneficios());
 		model.addAttribute("cliente", cliente);
+		model.addAttribute("beneficios", beneficioService.getBeneficios());
 		return "nuevo-cliente";
 	}
 	@GetMapping("/cliente/borrar/{id}")
