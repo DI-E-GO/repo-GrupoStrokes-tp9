@@ -23,8 +23,8 @@
 									<label for="inputIdCompra" class="col-form-label">Beneficios</label>
 								</div>
 								<div class="col-8">
-									<select class="form-select" id="descripcion" th:field="*{descripcion}">
-										<option selected value="">Seleccione una opción</option>
+									<select name="opcion" onchange="if(this.value!='empty') {document.getElementById('select').disabled = false} else {document.getElementById('select').disabled = true}" class="form-select" id="descripcion" th:field="*{descripcion}">
+										<option selected value="empty">Seleccione una opción</option>
 										<option th:each="bene : ${beneficios}" th:text="${bene.descripcion}" th:value="${bene.descripcion}"></option>
 									</select>
 								</div>
@@ -35,7 +35,7 @@
 										th:errors="*{descripcion}"></div>
 								</div>
 								<div class="text-center">
-									<input class="btn btn-outline-success" type="submit" value="Agregar Beneficio">
+									<input id="select" name="opcion" disabled class="btn btn-outline-success" type="submit" value="Agregar Beneficio">
 								</div>
 							</div>
 						</form>

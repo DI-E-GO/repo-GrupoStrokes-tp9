@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tp8.model.Cliente;
@@ -22,7 +23,10 @@ public class ClienteServiceMysqlImp implements IClienteService{
 
 	@Override
 	public void addCliente(Cliente cliente) {
-		// TODO Auto-generated method stub
+		/*
+		 * BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		 * cliente.setPassword(bCryptPasswordEncoder.encode(cliente.getPassword()));
+		 */
 		clienteRepository.save(cliente);
 	}
 

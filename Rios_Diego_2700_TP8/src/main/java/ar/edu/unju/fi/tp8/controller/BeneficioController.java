@@ -41,8 +41,10 @@ public class BeneficioController {
 	@GetMapping("/beneficio/agregar")
 	public String agregarBeneficios(@ModelAttribute(name = "cliente")Cliente unCliente, @RequestParam( name = "descripcion")String descripcion, Model model, @ModelAttribute(name = "beneficio")Beneficio beneficio) {
 		Long id=MainController.idCliente;
-		Optional<Cliente> clienteU = clienteService.getCliente(id);
-		this.cliente = clienteU.get();	
+		if (id!=null) {
+			Optional<Cliente> clienteU = clienteService.getCliente(id);
+			this.cliente = clienteU.get();
+		}
 		Beneficio beneficioParaAgegar = beneficioService.getBeneficioPorDescripcion(descripcion);
 		beneficioService.agregarBeneficioListaBeneficiosAgregados(beneficioParaAgegar);
 		model.addAttribute("beneficiosAgregados", beneficioService.listaBeneficiosAgregados());
@@ -54,9 +56,11 @@ public class BeneficioController {
 	@GetMapping("/beneficio/quitaropcion/{id}")
 	public ModelAndView quitarOpcionListaBeneficios(@PathVariable(name = "id")Long id, @ModelAttribute(name = "cliente")Cliente cliente) {
 		ModelAndView modelView = new ModelAndView("nuevo-cliente");
-		Long idC=MainController.idCliente;
-		Optional<Cliente> clienteU = clienteService.getCliente(idC);
-		this.cliente = clienteU.get();
+		Long idU=MainController.idCliente;
+		if (idU!=null) {
+			Optional<Cliente> clienteU = clienteService.getCliente(idU);
+			this.cliente = clienteU.get();
+		}
 		beneficioService.quitarBeneficioListaBeneficiosAgregados(id);
 		modelView.addObject("beneficio", beneficio);
 		modelView.addObject("cliente", this.cliente);

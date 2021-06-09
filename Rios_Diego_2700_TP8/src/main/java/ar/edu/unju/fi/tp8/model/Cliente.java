@@ -67,7 +67,7 @@ public class Cliente {
 	private String email;
 	
 	@NotNull(message = "Ingrese una contraseña")
-	@Size(min = 4, max = 20, message = "Ingrese una contraseña desde 4 a 20 caracteres")
+	@Size(min = 4, max = 120, message = "Ingrese una contraseña desde 4 a 50 caracteres")
 	@Column(name = "password")
 	private String password;
 	
